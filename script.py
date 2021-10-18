@@ -5,16 +5,16 @@ from apikeys import *
 from opp_ids import *
 
 
-total_count = len(person_ids)
+total_count = len(opp_ids)
 current_count = 0
 corrected_count = 0
 
 log_file = open("log.csv", "w")
-log_file.write("Person ID, Status code, Note")
+log_file.write("Oppertunity ID, Status code, Note")
 log_file.write("\n")
 
-for each in person_ids:
-  response = requests.delete("https://api.affinity.co/persons/" + str(each), auth=('', api_key))
+for each in opp_ids:
+  response = requests.delete("https://api.affinity.co/opportunities/" + str(each), auth=('', api_key))
   current_count = current_count + 1
 
   if response.status_code == 200:
@@ -47,6 +47,6 @@ for each in person_ids:
   	log_file.write("\n")
 
 log_file.write("\n")
-log_file.write("Number of successful person removed: " + str(corrected_count)+"\n")
+log_file.write("Number of successful oppertunities removed: " + str(corrected_count)+"\n")
 log_file.write("Number of entries proccessed: " + str(current_count))
 log_file.close()
